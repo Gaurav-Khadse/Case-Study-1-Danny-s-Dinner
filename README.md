@@ -47,7 +47,8 @@ GROUP BY s.customer_id
 ORDER BY s.customer_id;
 ```
 - Answer:
-  
+  ![Question 1](https://github.com/user-attachments/assets/2893f9cd-3a18-48cc-ab55-3a10c6d93b21)
+
   - The SQL query retrieves the customer_id and calculates the total amount spent (total_amnt) by each customer at the restaurant.
   - It combines data from the sales and menu tables based on matching product_id.
   - The results are grouped by customer_id.
@@ -65,7 +66,8 @@ FROM sales
 GROUP BY customer_id;
 ```
 - Answer:
-  
+  ![Question 2](https://github.com/user-attachments/assets/e8412a8a-de88-4d25-aa4f-bbc3d7b169c5)
+
   - The SQL query selects the customer_id and counts the number of distinct order dates (No_Days) for each customer.
   - It retrieves data from the sales table.
   - The results are grouped by customer_id.
@@ -86,6 +88,8 @@ FROM first_purchases
 WHERE rn = 1;
 ```
 - Answer:
+  ![Question 3](https://github.com/user-attachments/assets/2e4bc038-aebb-45ea-ac39-8acca9cec47d)
+
   - The SQL query uses a Common Table Expression (CTE) named CTE to generate a temporary result set.
   - Within the CTE, it selects the customer_id, assigns a dense rank to each row based on the order date for each customer, and retrieves the corresponding product_name from the menu table.
   - The sales table is joined with the menu table on matching product_id.
@@ -106,6 +110,8 @@ ORDER BY purchase_count DESC
 LIMIT 1;
 ```
 - Answer:
+  ![Question 4](https://github.com/user-attachments/assets/c0e3e389-0f17-4a6b-9ee1-1c3b6b75eafa)
+
   -  The SQL query selects the product_name from the menu table and counts the number of times each product was ordered (most_ordered).
   - It retrieves data from the Sales table and joins it with the menu table based on matching product_id.
   - The results are grouped by product_name.
@@ -129,6 +135,8 @@ FROM customer_favorites
 WHERE rn = 1;
 ```
 - Answer:
+  ![Question 5](https://github.com/user-attachments/assets/ed6150f7-4616-486f-87e0-a7896fa79217)
+
   - The SQL query uses a Common Table Expression (CTE) named CTE to generate a temporary result set.
   - Within the CTE, it selects the customer_id, product_name, and counts the number of times each product was ordered (purchase_count) for each customer.
   - It retrieves data from the sales table and joins it with the menu table based on matching product_id.
@@ -155,6 +163,8 @@ WHERE s.order_date >= mem.join_date
 SELECT * FROM first_post_member_purchase WHERE rn = 1;
 ```
 - Answer:
+  ![Question 6](https://github.com/user-attachments/assets/2cb23658-cf45-43d6-b958-d2717d4627ca)
+
   - The SQL query is designed to retrieve the first product purchased by each customer after becoming a member.
   - The query uses Common Table Expression (CTE) named first_post_member_purchase to organize intermediate results.
   - In the CTE, the sales table is aliased as s, the menu table as m, and the members table as mem.
@@ -185,6 +195,8 @@ WHERE rn = 1;
 
 ```
 - Answer:
+  ![Question 7](https://github.com/user-attachments/assets/b37da102-bcf2-4e27-ac06-a0508e4a41e6)
+
   - To find the item that was purchased just before a customer became a member, we use a common table expression (CTE) called ranked_purchases. 
   - This CTE joins the sales, menu, and members tables to gather information about each purchase, including the product name, purchase date, and membership join date. 
   - We only consider purchases that occurred before the customer’s join date using the condition s.order_date < me.join_date.
@@ -208,6 +220,8 @@ ORDER BY s.customer_id;
 
 ```
 - Answer:
+  ![Question 8](https://github.com/user-attachments/assets/cd14468d-2d4f-4e6f-a8b6-1896d6bb8992)
+
   - This SQL query calculates the total number of unique items, total purchases, and the total amount spent by each customer before they became a member.
   - The query uses INNER JOINs between the sales, menu, and members tables to get the necessary details for each purchase.
   - It filters the data using the condition s.order_date < mem.join_date, which ensures that only the purchases made before the membership start date are included.
@@ -230,6 +244,8 @@ GROUP BY s.customer_id
 ORDER BY s.customer_id;
 ```
 - Answer:
+  ![Question 9](https://github.com/user-attachments/assets/7a616a65-1c44-4b11-80a5-8286a0b47bca)
+
   - This query calculates how many reward points each customer earned based on their total spending.
   - Each $1 spent equals 10 points, but if the product purchased is sushi, then it earns double points (20 points per dollar).
   - The query joins the sales and menu tables using the product_id to access the price and product name for each sale.
@@ -253,6 +269,8 @@ GROUP BY s.customer_id
 ORDER BY s.customer_id;
 ```
 - Answer:
+  ![Question 10](https://github.com/user-attachments/assets/302cc295-fb1b-44f2-9838-71cbe71b2c1d)
+
   - This query calculates the total points earned by each customer up to January 31, with the condition that the first 7 days after joining the program have a 2x points multiplier on all items, not just sushi.
   - The query performs a join between the sales, menu, and members tables.
   - The WHERE clause limits the results to orders placed on or before '2021-01-31'.
@@ -281,6 +299,8 @@ FROM customer_member_status
 ORDER BY customer_id,member DESC,order_date;
 ```
 - Answer:
+  ![Join all Things](https://github.com/user-attachments/assets/4b039af2-796b-4703-a54e-c543b6b4676a)
+
   - The SQL query starts by creating a Common Table Expression (CTE) named customer_member_status.
   - Within the CTE, it selects customer_id, order_date, product_name, price, and uses a CASE statement to determine whether the customer is a member ('Y') or not ('N') based on their join date in the members table.
   - The sales table is aliased as s, the menu table as m, and the members table as mbr.
@@ -309,6 +329,8 @@ CASE WHEN member_status = 'N' THEN NULL ELSE RANK() OVER (PARTITION BY customer_
 FROM customers_data;
 ```
 - Answer:
+  ![Rank all things](https://github.com/user-attachments/assets/b4f8ae1b-fd60-4139-8f83-29cb62414e0a)
+
   - The SQL query starts by creating a Common Table Expression (CTE) named customers_data.
   - Within the CTE, it selects customer_id, order_date, product_name, price, and uses a CASE statement to determine the member_status based on whether the join_date in the members table is greater, equal, or less than the order_date in sales 
     table.
