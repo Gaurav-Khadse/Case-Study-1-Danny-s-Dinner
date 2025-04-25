@@ -44,19 +44,13 @@ FROM sales s
 JOIN menu m ON s.product_id = m.product_id
 GROUP BY s.customer_id
 ORDER BY s.customer_id;
-   ```
--  Answer:
-  
+Answer:
+ ```
   - The SQL query retrieves the customer_id and calculates the total amount spent (total_amnt) by each customer at the restaurant.
-    
   - It combines data from the sales and menu tables based on matching product_id.
-    
   - The results are grouped by customer_id.
-    
   - The query then calculates the total sum of price for each group of sales records with the same customer_id.
-    
   - Finally, the results are sorted in ascending order based on the customer_id.
-    
   - Sub-point (indented with 2 spaces)
     
 
