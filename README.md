@@ -72,10 +72,25 @@ GROUP BY customer_id;
   - Finally, the query presents the total number of unique order dates as No_Days for each customer.
 
 
-
-
-
-
-
-
+3.What was the first item from the menu purchased by each customer?
+```sql
+WITH first_purchases AS (
+SELECT s.customer_id,m.product_name,s.order_date,
+DENSE_RANK() OVER (PARTITION BY s.customer_id ORDER BY s.order_date) AS rn
+FROM sales s
+JOIN menu m ON s.product_id = m.product_id
+)
+SELECT customer_id,product_name
+FROM first_purchases
+WHERE rn = 1;
+```
+- Answer:
+  - The SQL query uses a Common Table Expression (CTE) named CTE to generate a temporary result set.
+  - Within the CTE, it selects the customer_id, assigns a dense rank to each row based on the order date for each customer, and retrieves the corresponding product_name from the menu table.
+  - The sales table is joined with the menu table on matching product_id.
+  - The DENSE_RANK() function assigns a rank to each row within the partition of each customer_id based on the order_date in ascending order.
+  - Each customer_id has its own partition and separate ranks based on the order dates of their purchases.
+  - Next, the main query selects the customer_id and corresponding product_name from the CTE.
+  - It filters the results and only includes rows where the rank rn is equal to 1, which means the earliest purchase for each customer_id.
+  - As a result, the query returns the first purchased product for each customer.
  
