@@ -263,5 +263,60 @@ ORDER BY s.customer_id;
   - The query groups by customer_id and returns total points earned up to the end of January.
   - It shows how promotions affect loyalty points for each member.
 
+## Bonus Questions & Solutions
+
+Join All The Things
+
+```sql
+WITH customer_member_status AS (
+SELECT s.customer_id,s.order_date,m.product_name,m.price,
+CASE WHEN mbr.join_date <= s.order_date THEN 'Y'ELSE 'N'END AS member
+FROM sales s
+INNER JOIN menu m ON s.product_id = m.product_id
+LEFT JOIN members mbr ON s.customer_id = mbr.customer_id
+)
+SELECT customer_id,order_date,product_name,price,member
+FROM customer_member_status
+ORDER BY customer_id,member DESC,order_date;
+```
+- Answer:
+  - The SQL query starts by creating a Common Table Expression (CTE) named customer_member_status.
+  - Within the CTE, it selects customer_id, order_date, product_name, price, and uses a CASE statement to determine whether the customer is a member ('Y') or not ('N') based on their join date in the members table.
+  - The sales table is aliased as s, the menu table as m, and the members table as mbr.
+  - The query performs inner joins between sales and menu tables on matching product_id and left join between sales and members tables on matching customer_id.
+  - For each row, the CASE statement checks if the join_date from the members table is less than or equal to the order_date from the sales table.
+  - If true, it assigns 'Y' (member) to the member column, otherwise 'N' (non-member).
+  - Next, the main query selects the customer_id, order_date, product_name, price, and member from the customer_member_status CTE.
+  - Results are ordered first by customer_id in ascending order, then by member in descending order (so members appear first), and finally by order_date in ascending order.
+  - The query presents the final results with the selected columns for each customer, showing whether they are a member or not for each order and sorted accordingly.
 
 
+Rank All The Things
+
+
+```sql
+WITH customers_data AS (
+SELECT sales.customer_id, sales.order_date,  menu.product_name, menu.price,
+CASE WHEN members.join_date > sales.order_date THEN 'N'WHEN members.join_date <= sales.order_date THEN 'Y'ELSE 'N' END AS member_status
+FROM sales
+LEFT JOIN members ON sales.customer_id = members.customer_id
+INNER JOIN menu ON sales.product_id = menu.product_id
+)
+
+SELECT customer_id,order_date,product_name,price,member_status AS member,
+CASE WHEN member_status = 'N' THEN NULL ELSE RANK() OVER (PARTITION BY customer_id, member_status ORDER BY order_date)END AS ranking
+FROM customers_data;
+```
+- Answer:
+  - The SQL query starts by creating a Common Table Expression (CTE) named customers_data.
+  - Within the CTE, it selects customer_id, order_date, product_name, price, and uses a CASE statement to determine the member_status based on whether the join_date in the members table is greater, equal, or less than the order_date in sales 
+    table.
+  - The sales table is aliased as sales, the members table as members, and the menu table as menu.
+  - The query performs left join between sales and members tables on matching customer_id and inner join between sales and menu tables on matching product_id.
+  - For each row, the CASE statement checks the join_date from the members table and compares it to the order_date from the sales table, assigning 'Y' if the join_date is less than or equal to the order_date (customer is a member) and 'N' 
+    otherwise (non-member).
+  - Next, the main query selects the customer_id, order_date, product_name, price, and member_status from the customers_data CTE.
+  - It also uses a CASE statement to calculate the ranking for each customer's orders if they are a member ('Y'). The RANK() function is used with PARTITION BY to partition the ranking within each customer and their membership status and 
+    ordered by order_date.
+  - If the customer is not a member ('N'), the ranking is set to NULL.
+  - Results are presented with the selected columns and ranking for each customer's orders, showing whether they are a member or not and the order of their orders.
