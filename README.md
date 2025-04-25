@@ -47,6 +47,7 @@ GROUP BY s.customer_id
 ORDER BY s.customer_id;
 ```
 - Answer:
+
   ![Question 1](https://github.com/user-attachments/assets/2893f9cd-3a18-48cc-ab55-3a10c6d93b21)
 
   - The SQL query retrieves the customer_id and calculates the total amount spent (total_amnt) by each customer at the restaurant.
@@ -66,6 +67,7 @@ FROM sales
 GROUP BY customer_id;
 ```
 - Answer:
+  
   ![Question 2](https://github.com/user-attachments/assets/e8412a8a-de88-4d25-aa4f-bbc3d7b169c5)
 
   - The SQL query selects the customer_id and counts the number of distinct order dates (No_Days) for each customer.
