@@ -90,6 +90,7 @@ FROM first_purchases
 WHERE rn = 1;
 ```
 - Answer:
+  
   ![Question 3](https://github.com/user-attachments/assets/2e4bc038-aebb-45ea-ac39-8acca9cec47d)
 
   - The SQL query uses a Common Table Expression (CTE) named CTE to generate a temporary result set.
@@ -112,6 +113,7 @@ ORDER BY purchase_count DESC
 LIMIT 1;
 ```
 - Answer:
+  
   ![Question 4](https://github.com/user-attachments/assets/c0e3e389-0f17-4a6b-9ee1-1c3b6b75eafa)
 
   -  The SQL query selects the product_name from the menu table and counts the number of times each product was ordered (most_ordered).
@@ -137,6 +139,7 @@ FROM customer_favorites
 WHERE rn = 1;
 ```
 - Answer:
+  
   ![Question 5](https://github.com/user-attachments/assets/ed6150f7-4616-486f-87e0-a7896fa79217)
 
   - The SQL query uses a Common Table Expression (CTE) named CTE to generate a temporary result set.
@@ -165,6 +168,7 @@ WHERE s.order_date >= mem.join_date
 SELECT * FROM first_post_member_purchase WHERE rn = 1;
 ```
 - Answer:
+  
   ![Question 6](https://github.com/user-attachments/assets/2cb23658-cf45-43d6-b958-d2717d4627ca)
 
   - The SQL query is designed to retrieve the first product purchased by each customer after becoming a member.
@@ -197,6 +201,7 @@ WHERE rn = 1;
 
 ```
 - Answer:
+  
   ![Question 7](https://github.com/user-attachments/assets/b37da102-bcf2-4e27-ac06-a0508e4a41e6)
 
   - To find the item that was purchased just before a customer became a member, we use a common table expression (CTE) called ranked_purchases. 
@@ -222,6 +227,7 @@ ORDER BY s.customer_id;
 
 ```
 - Answer:
+  
   ![Question 8](https://github.com/user-attachments/assets/cd14468d-2d4f-4e6f-a8b6-1896d6bb8992)
 
   - This SQL query calculates the total number of unique items, total purchases, and the total amount spent by each customer before they became a member.
@@ -246,6 +252,7 @@ GROUP BY s.customer_id
 ORDER BY s.customer_id;
 ```
 - Answer:
+  
   ![Question 9](https://github.com/user-attachments/assets/7a616a65-1c44-4b11-80a5-8286a0b47bca)
 
   - This query calculates how many reward points each customer earned based on their total spending.
@@ -271,6 +278,7 @@ GROUP BY s.customer_id
 ORDER BY s.customer_id;
 ```
 - Answer:
+  
   ![Question 10](https://github.com/user-attachments/assets/302cc295-fb1b-44f2-9838-71cbe71b2c1d)
 
   - This query calculates the total points earned by each customer up to January 31, with the condition that the first 7 days after joining the program have a 2x points multiplier on all items, not just sushi.
@@ -301,6 +309,7 @@ FROM customer_member_status
 ORDER BY customer_id,member DESC,order_date;
 ```
 - Answer:
+  
   ![Join all Things](https://github.com/user-attachments/assets/4b039af2-796b-4703-a54e-c543b6b4676a)
 
   - The SQL query starts by creating a Common Table Expression (CTE) named customer_member_status.
@@ -331,6 +340,7 @@ CASE WHEN member_status = 'N' THEN NULL ELSE RANK() OVER (PARTITION BY customer_
 FROM customers_data;
 ```
 - Answer:
+  
   ![Rank all things](https://github.com/user-attachments/assets/b4f8ae1b-fd60-4139-8f83-29cb62414e0a)
 
   - The SQL query starts by creating a Common Table Expression (CTE) named customers_data.
