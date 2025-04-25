@@ -45,7 +45,7 @@ JOIN menu m ON s.product_id = m.product_id
 GROUP BY s.customer_id
 ORDER BY s.customer_id;
    ```
-### Answer:
+-  Answer:
   
   - The SQL query retrieves the customer_id and calculates the total amount spent (total_amnt) by each customer at the restaurant.
     
@@ -60,14 +60,21 @@ ORDER BY s.customer_id;
   - Sub-point (indented with 2 spaces)
     
 
+2.How many days has each customer visited the restaurant?
 
+```sql
 
-
-
-
-
-
-
+SELECT customer_id,COUNT(DISTINCT order_date) AS days_visited
+FROM sales
+GROUP BY customer_id;
+```
+- Answer:
+  
+  - The SQL query selects the customer_id and counts the number of distinct order dates (No_Days) for each customer.
+  - It retrieves data from the sales table.
+  - The results are grouped by customer_id.
+  - The COUNT(DISTINCT order_date) function calculates the number of unique order dates for each customer.
+  - Finally, the query presents the total number of unique order dates as No_Days for each customer.
 
 
 
